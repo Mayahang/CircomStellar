@@ -5,5 +5,8 @@
   "description": "Simple Circom + Groth16 + Soroban verifier demo",
   "devDependencies": {
     "snarkjs": "0.7.5"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5"
   }
 }

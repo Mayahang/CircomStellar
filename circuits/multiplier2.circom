@@ -1,10 +1,23 @@
 pragma circom 2.0.0;
 
-template Multiplier2 () {    
-   signal input a;  
-   signal input b;  
-   signal output c;  
-   c <== a * b;  
+include "../node_modules/circomlib/circuits/comparators.circom";
+
+template CreditScore() {
+    signal input tx_count;
+    signal input balance_xlm;
+    signal input age_days;
+    signal input unique_assets;
+    signal input threshold;   // keep private now
+
+    signal output out;
+
+    signal score;
+    score <== tx_count * 3 + balance_xlm * 2 + age_days + unique_assets * 10;
+
+    component gte = GreaterEqThan(10);
+    gte.in[0] <== score;
+    gte.in[1] <== threshold;
+    out <== gte.out;
 }
 
-component main = Multiplier2();
+component main = CreditScore();
