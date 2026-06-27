@@ -1,13 +1,24 @@
 [package]
-name = "bn254-groth16-verifier"
-version = "0.1.0"
+name = "zk-credit-verifier"
+version = "0.0.0"
 edition = "2021"
+publish = false
+rust-version = "1.89.0"
 
 [lib]
 crate-type = ["cdylib"]
+doctest = false
 
 [dependencies]
-soroban-sdk = { version = "22.0.0" }
+soroban-sdk = { version = "25.1.0", features = ["alloc"]}
+ark-bn254 = "0.5.0"
+ark-serialize = "0.5.0"
+ark-ec = "0.5.0"
+ark-ff = "0.5.0"
+
+[dev-dependencies]
+soroban-sdk = { version = "25.1.0", features = ["alloc", "testutils"] }
+ark-std = "0.5.0"
 
 [profile.release]
 opt-level = "z"
@@ -18,3 +29,13 @@ debug-assertions = false
 panic = "abort"
 codegen-units = 1
 lto = true
+
+[profile.release-with-logs]
+inherits = "release"
+debug-assertions = true
+
+[workspace]
+
+[patch.crates-io]
+zeroize = { version = "=1.4.3" }
+zeroize_derive = { version = "=1.4.2" }
