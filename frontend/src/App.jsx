@@ -104,7 +104,7 @@ export default function App() {
 
         {walletData && (
           <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "1.5rem", marginBottom: "1.5rem" }}>
-            <div style={{ fontSize: "0.75rem", color: "#7c8ba1", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>🔒 Private Inputs (never sent on-chain)</div>
+            <div style={{ fontSize: "0.75rem", color: "#7c8ba1", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>🔒 Local Inputs (shown here for transparency — only the proof goes on-chain)</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem" }}>
               {[{ l: "Transactions", v: walletData.display.txCount, w: "×3" }, { l: "XLM Balance", v: `${walletData.display.lumens} XLM`, w: "×2" }, { l: "Wallet Age", v: `${walletData.display.ageDays} days`, w: "×1" }, { l: "Asset Types", v: walletData.display.uniqueAssets, w: "×10" }].map(s => (
                 <div key={s.l} style={{ background: "rgba(0,0,0,0.2)", borderRadius: 8, padding: "0.75rem" }}>
