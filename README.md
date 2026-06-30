@@ -8,7 +8,6 @@ Most on-chain reputation systems force a tradeoff: either you reveal everything 
 
 The app reads your Stellar wallet's public data (transaction count, XLM balance, wallet age, number of asset types), combines it into a credit score using a weighted formula, and then generates a Groth16 zero-knowledge proof that the score clears a threshold — all inside your browser. The actual numbers never get sent anywhere. The only thing that leaves your device is a cryptographic proof that says, essentially, "yes, this wallet qualifies," without exposing why.
 
-Try it: [live demo link]
 Contract on Stellar testnet: `CBCPR4RSAJ5S53T6Y3TK7EIZE3PYDX6LKAYQMOKSIXMZP626FCKIIIPL`
 
 ## How it works
