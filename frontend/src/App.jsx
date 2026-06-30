@@ -69,7 +69,11 @@ export default function App() {
       );
       addLog("✅ Groth16 proof generated successfully!");
       addLog(`🔒 On-chain verifier sees only: ${publicSignals[0] === "1" ? "PASS" : "FAIL"} — never your actual data`);
-      setResult({ verified: publicSignals[0] === "1", score: data.display.score });
+      const fBE = (n) => BigInt(n).toString(16).padStart(64, "0");
+      const g1 = (p) => fBE(p[0]) + fBE(p[1]);
+      const g2 = (p) => fBE(p[0][0]) + fBE(p[0][1]) + fBE(p[1][0]) + fBE(p[1][1]);
+      const proofHex = g1(proof.pi_a) + g2(proof.pi_b) + g1(proof.pi_c);
+      setResult({ verified: publicSignals[0] === "1", score: data.display.score, proofHex });
       setStep("done");
     } catch (e) {
       setError(e.message || String(e));
@@ -176,9 +180,22 @@ export default function App() {
             <div style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.95rem", marginBottom: "1rem" }}>
               Score: <strong style={{ color: "#ffffff" }}>{result.score}</strong> · Threshold: <strong style={{ color: "#ffffff" }}>{THRESHOLD}</strong>
             </div>
-            <div style={{ display: "inline-block", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "0.5rem 1rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.7)" }}>
+            <div style={{ display: "inline-block", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "0.5rem 1rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.7)", marginBottom: "1rem" }}>
               🔐 Groth16 ZK proof verified · Your financial data stayed private
             </div>
+            {result.proofHex && (
+              <details style={{ textAlign: "left", marginTop: "1rem" }}>
+                <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "#c4b5fd" }}>
+                  View raw proof bytes (sent to blockchain)
+                </summary>
+                <div style={{ background: "rgba(0,0,0,0.4)", borderRadius: 8, padding: "0.75rem", marginTop: "0.5rem", fontSize: "0.7rem", color: "rgba(255,255,255,0.5)", fontFamily: "monospace", wordBreak: "break-all", maxHeight: 120, overflow: "auto" }}>
+                  {result.proofHex}
+                </div>
+                <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.4)", marginTop: "0.5rem" }}>
+                  This is pure cryptographic data. Your balance, transaction count, and wallet age cannot be extracted from it.
+                </p>
+              </details>
+            )}
           </div>
         )}
 
