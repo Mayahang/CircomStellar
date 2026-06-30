@@ -99,7 +99,7 @@ export default function App() {
             ZK Credit Score
           </h1>
           <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "1.05rem", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
-            Prove your Stellar wallet is creditworthy — without revealing your balance, transactions, or wallet age.
+            Generate a cryptographic proof that your wallet qualifies. Only PASS/FAIL goes on-chain - your actual financial data never leaves your browser.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function App() {
         {walletData && (
           <div style={card}>
             <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.4)", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 600 }}>
-              🔒 Private Inputs — Computed locally, never sent on-chain
+              🔒 Shown to you for transparency — these numbers never leave your browser or touch the blockchain
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.75rem" }}>
               {[
