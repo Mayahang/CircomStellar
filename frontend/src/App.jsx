@@ -6,18 +6,22 @@ const HORIZON = "https://horizon-testnet.stellar.org";
 const THRESHOLD = 50;
 
 async function fetchWalletData(address) {
-  const [accRes, txRes] = await Promise.all([
+  const [accRes, txRes, oldestTxRes] = await Promise.all([
     fetch(`${HORIZON}/accounts/${address}`),
     fetch(`${HORIZON}/accounts/${address}/transactions?limit=200&order=desc`),
+    fetch(`${HORIZON}/accounts/${address}/transactions?limit=1&order=asc`),
   ]);
   if (!accRes.ok) throw new Error("Account not found on testnet.");
   const acc = await accRes.json();
   const txData = await txRes.json();
+  const oldestData = await oldestTxRes.json();
   const txns = txData._embedded?.records || [];
+  const oldestTx = oldestData._embedded?.records?.[0];
   const xlmBal = acc.balances.find(b => b.asset_type === "native");
   const lumens = xlmBal ? Math.min(Math.floor(parseFloat(xlmBal.balance)), 10000) : 0;
   const txCount = Math.min(txns.length, 200);
-  const ageDays = Math.min(Math.floor((Date.now() - new Date(acc.last_modified_time)) / 86400000), 3650);
+  const createdAt = oldestTx ? new Date(oldestTx.created_at) : new Date(acc.last_modified_time);
+  const ageDays = Math.min(Math.floor((Date.now() - createdAt) / 86400000), 3650);
   const uniqueAssets = Math.min(acc.balances.length, 20);
   const score = txCount * 3 + lumens * 2 + ageDays + uniqueAssets * 10;
   return {
