@@ -55,6 +55,6 @@ The circuit artifacts (`.wasm`, `.zkey`, verification key) are already built and
 
 ## Why this matters
 
-Lending, reputation, and access-gating on public blockchains usually means choosing between full transparency or full opacity. This project is a small proof of concept for a middle path: wallets can prove they meet a bar — creditworthy, established, active — without broadcasting their entire financial history to anyone who looks them up. It's a pattern that could extend to KYC-lite checks, private airdrops, undercollateralized lending, or reputation-gated DAOs.
+Lending, reputation, and access-gating on public blockchains usually means choosing between full transparency or full opacity. This project is a small proof of concept for a middle path: wallets can prove they meet a bar — creditworthy, established, active without broadcasting their entire financial history to anyone who looks them up. It's a pattern that could extend to KYC-lite checks, private airdrops, undercollateralized lending, or reputation-gated DAOs.
 
-Built solo for the Stellar Hacks: Real-World ZK hackathon.
+Built solo for the Stellar Hacks: Real World ZK hackathon.
