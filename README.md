@@ -6,7 +6,7 @@ A zero-knowledge credit scoring system built on Stellar. Prove your wallet is cr
 
 Most on-chain reputation systems force a tradeoff: either you reveal everything about your wallet, or you reveal nothing and get no credit for your history. This project removes that tradeoff using zero-knowledge proofs.
 
-The app reads your Stellar wallet's public data (transaction count, XLM balance, wallet age, number of asset types), combines it into a credit score using a weighted formula, and then generates a Groth16 zero-knowledge proof that the score clears a threshold — all inside your browser. The actual numbers never get sent anywhere. The only thing that leaves your device is a cryptographic proof that says, essentially, "yes, this wallet qualifies," without exposing why.
+The app reads your Stellar wallet's public data (transaction count, XLM balance, wallet age, number of asset types), combines it into a credit score using a weighted formula, and then generates a Groth16 zero-knowledge proof that the score clears a threshold all inside your browser. The actual numbers never get sent anywhere. The only thing that leaves your device is a cryptographic proof that says, essentially, "yes, this wallet qualifies," without exposing why.
 
 Contract on Stellar testnet: `CBCPR4RSAJ5S53T6Y3TK7EIZE3PYDX6LKAYQMOKSIXMZP626FCKIIIPL`
 
